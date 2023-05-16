@@ -11,6 +11,7 @@ import { LibrosComponent } from './libros/libros.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { Error404Component } from './error404/error404.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { Error404Component } from './error404/error404.component';
     LibrosComponent,
     ActividadesComponent,
     IniciarSesionComponent,
-    Error404Component
+    Error404Component,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

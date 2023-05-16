@@ -10,6 +10,7 @@
   </div>
 
   <div class="form-group">
-    <button type="submit" name="submit" class="btn btn-primary form" onclick="iniciarSesion(email_value, password_value)"> Iniciar sesión </button>
+    <button type="submit" name="submit" class="btn btn-primary form" (click)="iniciarSesion(email_value.value, password_value.value)"> Iniciar sesión </button>
+    ¿No tiene una cuenta? Regístrese <a routerLink="/register" routerLinkActive="active" aria-current="page" href="#"> aqui</a>
   </div>
 

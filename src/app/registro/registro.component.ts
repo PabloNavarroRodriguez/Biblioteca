@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ConexionAPIService } from '../conexion-api.service';
 
 @Component({
-  selector: 'app-iniciar-sesion',
-  templateUrl: './iniciar-sesion.component.html',
-  styleUrls: ['./iniciar-sesion.component.css']
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css']
 })
-export class IniciarSesionComponent {
+export class RegistroComponent {
   constructor(private conexion_api:ConexionAPIService){}
 
   comprobarDatos(email:string){
@@ -14,12 +14,12 @@ export class IniciarSesionComponent {
     return emailRegex.test(email);
   }
 
-  iniciarSesion(email:string, passwd:string){
-    if(email == "" || passwd==""){
+  registrarse(email:string, username:string, passwd:string){
+    if(email == "" || passwd=="" || username==""){
       alert("Esta vacio");
     }
     if(this.comprobarDatos(email)){
-      this.conexion_api.login(email, passwd);
+      this.conexion_api.registrarse(email, username, passwd);
     } else {
       alert("No es un email");
     }
