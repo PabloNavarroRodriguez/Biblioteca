@@ -13,8 +13,7 @@ export class TarjetaLibroComponent {
     return this.conexion_api.get_libros();
   }
 
-  reservar(libro:any){
-
-    this.conexion_api.reservar();
+  reservar(id:number){
+    this.conexion_api.reservar(id);
   }
 }
