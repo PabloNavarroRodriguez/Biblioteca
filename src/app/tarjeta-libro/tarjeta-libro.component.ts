@@ -10,7 +10,10 @@ export class TarjetaLibroComponent {
   constructor(private conexion_api:ConexionAPIService){}
 
   get_libros(){
-    console.log(this.conexion_api.get_libros());
     return this.conexion_api.get_libros();
+  }
+
+  reservar(id:number){
+    this.conexion_api.reservar(id);
   }
 }

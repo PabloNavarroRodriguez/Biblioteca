@@ -17,8 +17,12 @@
               <li class="nav-item">
                 <a routerLink="/actividades" routerLinkActive="active" class="nav-link text-white" aria-current="page" href="#">Actividades</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="!isLogueado()">
                 <a routerLink="/login" routerLinkActive="active" class="nav-link text-white" aria-current="page" href="#">Iniciar sesión</a>
+                <!-- <a class="nav-link text-white" href="#">Iniciar sesion</a> -->
+              </li>
+              <li class="nav-item" *ngIf="isLogueado()">
+                <a onclick="desplegarMenu()" class="nav-link text-white" aria-current="page"><i class='fas fa-user' style='font-size:38px;color:white'></i></a>
                 <!-- <a class="nav-link text-white" href="#">Iniciar sesion</a> -->
               </li>
             </ul>
@@ -28,4 +32,18 @@
   </div>
 </header>
 
+<div id="menu" class="menu">
+  <ul>
+    <li><a href="#">Mi perfil</a></li>
+    <li><a href="#">Mis favoritos</a></li>
+    <li><a href="#">Cerrar sesión</a></li>
+  </ul>
+</div>
 
+<script>
+  function desplegarMenu() {
+  var menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
+}
+
+</script>
