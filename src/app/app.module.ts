@@ -11,7 +11,9 @@ import { LibrosComponent } from './libros/libros.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { Error404Component } from './error404/error404.component';
+import { DragScrollModule } from 'ngx-drag-scroll';
 import { RegistroComponent } from './registro/registro.component';
+import { FiltrosComponent } from './filtros/filtros.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { RegistroComponent } from './registro/registro.component';
     ActividadesComponent,
     IniciarSesionComponent,
     Error404Component,
-    RegistroComponent
+    RegistroComponent,
+    FiltrosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DragScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

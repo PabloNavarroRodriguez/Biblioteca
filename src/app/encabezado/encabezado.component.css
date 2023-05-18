@@ -5,6 +5,7 @@
   width: 100%;
   height: 80px;
   background-image: url('../../assets/imagenes_comunes/books-4515917_1280.png');
+  /* background-color: burlywood; */
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -42,14 +43,7 @@
   margin: 0;
 }
 
-.menu ul li {
-  margin-bottom: 10px;
-}
 
-.menu ul li a {
-  text-decoration: none;
-  color: #333;
-}
 
 .menu ul li a:hover {
   text-decoration: underline;
