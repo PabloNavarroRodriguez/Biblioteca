@@ -2,4 +2,10 @@ drag-scroll {
   display: flex;
   flex-direction: row;
   overflow: auto;
+  height: 100%;
+}
+
+::ng-deep .drag-scroll-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

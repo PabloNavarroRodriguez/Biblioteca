@@ -10,18 +10,25 @@
         </svg>
       </span>
       <label for="busca" class="visually-hidden">Buscar:</label>
-      <input type="text" name="busca" id="busca" class="form-control" >[(ngModel)]="busca"
+      <input type="text" name="busca" id="busca" class="form-control" >
     </div>
   </div>
 
   <div class="menu-item">
     <label for="filtro">Filtrar por:</label>
-    <select name="filtro" id="filtro" class="form-select"> [(ngModel)]="filtro"
+    <select name="filtro" id="filtro" class="form-select">
       <option value="titulo">Título</option>
       <option value="autor">Autor</option>
       <option value="editora">Editora</option>
       <option value="genero">Gênero</option>
     </select>
   </div>
+
+  <h4>Géneros</h4>
+  <hr>
+  <input type="checkbox">Drama <br>
+  <input type="checkbox">Amor  <br>
+  <input type="checkbox">Aventura <br>
+  <input type="checkbox">Policiaca <br>
 </div>
 

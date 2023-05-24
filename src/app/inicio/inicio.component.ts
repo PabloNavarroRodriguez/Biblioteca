@@ -7,19 +7,26 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements AfterViewInit {
-  @ViewChild('nav', { read: DragScrollComponent }) ds!: DragScrollComponent;
+
+  @ViewChild('reservados', { read: DragScrollComponent }) ds1!: DragScrollComponent;
+  @ViewChild('incorporaciones', { read: DragScrollComponent }) ds2!: DragScrollComponent;
 
   ngAfterViewInit() {
-    console.log(this.ds); // Debería imprimir una referencia válida a DragScrollComponent.
   }
 
-  moveLeft() {
-    console.log('Moving left');
-    this.ds.moveLeft();
+  moveLeftReservado() {
+    this.ds1.moveLeft();
   }
 
-  moveRight() {
-    console.log('Moving right');
-    this.ds.moveRight();
+  moveRightReservado() {
+    this.ds1.moveRight();
+  }
+
+  moveLeftIncorporaciones() {
+    this.ds2.moveLeft();
+  }
+
+  moveRight1Incorporaciones() {
+    this.ds2.moveRight();
   }
 }

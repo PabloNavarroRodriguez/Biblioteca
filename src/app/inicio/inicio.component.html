@@ -1,6 +1,76 @@
-<drag-scroll #nav>
-    <!-- <app-tarjeta-libro></app-tarjeta-libro> -->
-</drag-scroll>
 
-<button (click)="moveLeft()">Left</button>
-<button (click)="moveRight()">Right</button>
+<h1>Novedades</h1>
+
+
+<h1>Los más reservados</h1>
+<div class="col 2 d-flex" style="align-items: center;">
+  <div class="d-flex align-items-center" style="flex-shrink: 0;">
+    <button style="all: unset;" (click)="moveLeftReservado()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M15 6l-6 6l6 6"></path>
+     </svg>
+    </button>
+  </div>
+  <div style="flex-grow: 1; min-width: 0;">
+    <div class="drag-scroll-wrapper" style="white-space: nowrap;">
+      <div class="drag-scroll-content">
+        <drag-scroll #reservados>
+          <!-- Contenido del drag-scroll -->
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+        </drag-scroll>
+      </div>
+    </div>
+  </div>
+  <div class="col 2 d-flex align-items-center" style="flex-shrink: 0;">
+    <button style="all: unset;" (click)="moveRightReservado()">
+      <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M9 6l6 6l-6 6"></path>
+     </svg>
+    </button>
+  </div>
+</div>
+<h1>Próximas incorporaciones</h1>
+<div class="col 2 d-flex" style="align-items: center;">
+  <div class="d-flex align-items-center" style="flex-shrink: 0;">
+    <button style="all: unset;" (click)="moveLeftIncorporaciones()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M15 6l-6 6l6 6"></path>
+     </svg>
+    </button>
+  </div>
+  <div style="flex-grow: 1; min-width: 0;">
+    <div class="drag-scroll-wrapper" style="white-space: nowrap;">
+      <div class="drag-scroll-content">
+        <drag-scroll #incorporaciones>
+          <!-- Contenido del drag-scroll -->
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+          <app-tarjeta-libro drag-scroll-item></app-tarjeta-libro>
+        </drag-scroll>
+      </div>
+    </div>
+  </div>
+  <div class="col 2 d-flex align-items-center" style="flex-shrink: 0;">
+    <button style="all: unset;" (click)="moveRight1Incorporaciones()">
+      <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M9 6l6 6l-6 6"></path>
+     </svg>
+    </button>
+  </div>
+</div>
+
+
