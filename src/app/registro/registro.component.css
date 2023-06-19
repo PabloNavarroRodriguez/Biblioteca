@@ -1,0 +1,251 @@
+
+label{
+  justify-content: left;
+}
+
+.form_main {
+  width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  padding: 30px 30px 30px 30px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.062);
+}
+
+.lateral-derecha{
+    content:"\f062";
+    display:inline-block;
+    padding-left:4px;
+    vertical-align:middle;
+    font-weight:900;
+    color:var(--gris-500);
+    font-size:19px;
+    margin-bottom: 4px;
+}
+
+.heading {
+  font-size: 2.5em;
+  color: #2e2e2e;
+  font-weight: 700;
+  margin: 15px 0 30px 0;
+}
+
+.inputContainer {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 10px;
+}
+
+.inputField {
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(173, 173, 173);
+  border-radius: 30px;
+  margin: 10px 0;
+  color: black;
+  font-size: .8em;
+  font-weight: 500;
+  box-sizing: border-box;
+  padding-left: 30px;
+}
+
+.inputField:focus {
+  outline: none;
+  border-bottom: 2px solid#5f2d04;;
+}
+
+.inputField::placeholder {
+  color: rgb(80, 80, 80);
+  font-size: 1em;
+  font-weight: 500;
+}
+
+#button {
+  position: relative;
+  width: 100%;
+  border: 2px solid black;
+  background-color: rgb(212, 175, 126);
+  height: 40px;
+  color: black;
+  font-size: .9em;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  margin: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#button::after {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.253);
+  height: 100%;
+  width: 150px;
+  top: 0;
+  left: -200px;
+  border-bottom-right-radius: 100px;
+  border-top-left-radius: 100px;
+  filter: blur(10px);
+  transition-duration: .5s;
+}
+
+#button:hover::after {
+  transform: translateX(600px);
+  transition-duration: .5s;
+}
+
+.signupContainer {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.signupContainer p {
+  font-size: .9em;
+  font-weight: 500;
+  color: black;
+}
+.signupContainer a {
+  font-size: .7em;
+  font-weight: 500;
+  background-color: #2e2e2e;
+  color: white;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+}
+
+.formulario_inicio_sesion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+
+.caja-lateral {
+  margin-bottom: 32px;
+  border: 10px solid var(--gris-200);
+  line-height: 140%;
+  margin-bottom: 32px;
+  padding: 24px;
+  font-size: 14px;
+}
+
+.triangulo {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 30px 30px 0 0;
+  border-color: var(--gris-200) transparent transparent transparent;
+  margin-top: -32px;
+  margin-bottom: 32px;
+}
+
+.caja-lateral .fas {
+  margin-right: 4px;
+}
+
+.caja-lateral h4 {
+  font-size: 20px;
+  border-bottom: 1px solid var(--gris-500);
+  padding-bottom: 8px;
+}
+
+.caja-lateral ul{
+  margin-left: -16px;
+  margin-bottom: 0;
+}
+
+.wow {
+	visibility:hidden ;
+}
+
+.caja-lateral li {
+  list-style: none;
+  padding-left: 16px;
+  background-size: 10px;
+  margin-left: -24px;
+}
+
+.caja-lateral img {
+  max-width: 100%;
+  height: auto;
+}
+
+.caja-lateral p:last-child {
+  margin-bottom: 8px;
+}
+
+.caja {
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  background-color: #f9f9f9;
+  font-size: large;
+  padding: 5px;
+  margin: 10px;
+}
+
+b{
+  color: red;
+}
+
+.error{
+  color: red;
+  font-weight: bold;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.aviso-abajo{
+  content:"\f062";
+  display:inline-block;
+  padding-left:4px;
+  vertical-align:middle;
+  font-weight:900;
+  color:var(--gris-500);
+  font-size:19px;
+  margin-top: 30px;
+}
+
+.aviso-caja{
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  background-color: #f9f9f9;
+  font-size: large;
+  padding: 5px;
+  margin: 10px;
+
+}
+.aviso-abajo p,h2{
+  color: black;
+}
+
+@media screen and (min-width: 992px) {
+  .aviso-abajo {
+    display: none;
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 991px) {
+  .lateral-derecha {
+    display: none;
+  }
+}

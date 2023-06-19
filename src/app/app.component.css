@@ -1,0 +1,16 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  /* Asegúrate de ajustar el valor "80px" a la altura correcta de tu encabezado y pie de página */
+  height: calc(100vh - 80px - Xpx); /* Xpx es la altura de tu footer */
+  overflow: auto; /* Para permitir el desplazamiento si el contenido es demasiado grande */
+}
+
+app-footer {
+  flex-shrink: 0;
+}

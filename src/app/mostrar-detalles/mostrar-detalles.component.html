@@ -1,0 +1,173 @@
+<div class="container">
+  <div class="row">
+    <button class="btn volver col-lg-1 col-md-1 d-md-block d-none" (click)="goBack()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+      </svg>
+    </button>
+    <div class="col-lg-4 col-md-9">
+        <img src={{libro.image}} alt="" width="100%">
+        <div class="clasificacion">
+          <p>:Puntuación media </p>
+          <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
+            <input disabled [id]="'radio' + rating" type="radio" [name]="'estrellas'" [value]="rating" [checked]="getCalificacionMedia(libro.id) <= rating">
+            <label [for]="'radio' + rating">★</label>
+          </ng-container>
+        </div>
+
+      </div>
+      <div class="col-lg-7">
+        <h2>{{libro.titulo}}</h2>
+        <h3><b>Autor: </b>{{getAutorById(libro.autorId)}}</h3>
+        <h3><b>Género: </b>{{getGeneroById(libro.generoId)}}</h3>
+        <h4><b>Editorial: </b>{{getEditorialById(libro.editorialId)}}</h4>
+        <h4><b>Fecha de publicación: </b>{{ libro.fecha_publicacion | date:'dd/MM/yyyy' }}</h4>
+        <hr>
+        <h3>Sinopsis</h3>
+        <p>{{libro.sinopsis}}</p>
+      </div>
+    </div>
+    <div class="row">
+  <div class="col-lg-5 col-0"></div> <!-- Espacio en blanco para separar la columna -->
+  <div class="col-lg-7 col-md-12">
+    <div class="row">
+      <div class="col-4 px-1">
+        <a href="../../assets/pdfs/Previsualizar.pdf" target="_blank" class="actions btn w-100" onclick="window.open(this.href, 'PDF', 'width=800,height=600'); return false;">Previsualización</a>
+      </div>
+      <ng-container *ngIf="isLogueado()">
+        <div *ngIf="getStock(libro.id)==0 && !estaReservado(libro.id)" class="col-4 px-1">
+          <button id="btnReservar" class="actions btn w-100" (click)="reservar(libro.id)">Reservar</button>
+        </div>
+        <div *ngIf="getStock(libro.id)==0 && estaReservado(libro.id)" class="col-4 px-1">
+          <button id="btnReservar" class="actions btn w-100" (click)="cancelarReserva(libro.id)" >Cancelar reserva</button>
+        </div>
+        <div *ngIf="getStock(libro.id)>0 && !estaPrestado(libro.id)" class="col-4 px-1">
+          <button id="btnPrestar" class="actions btn w-100" (click)="prestar(libro.id)">Prestar</button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!isLogueado()">
+        <div *ngIf="getStock(libro.id)==0 " class="col-4 px-1">
+          <button id="btnReservar" class="actions btn w-100" (click)="reservar(libro.id)">Reservar</button>
+        </div>
+        <div *ngIf="getStock(libro.id)>0" class="col-4 px-1">
+          <button id="btnPrestar" class="actions btn w-100" (click)="prestar(libro.id)">Prestar</button>
+        </div>
+      </ng-container>
+      <div class="col-4 px-1">
+        <a *ngIf="isLogueado() && estaPrestado(libro.id)" href="../../assets/pdfs/Previsualizar.pdf" download="Previsualización.pdf" class="actions btn w-100">Descargar</a>
+        <a *ngIf="isLogueado() && !estaPrestado(libro.id)" ref="../../assets/pdfs/Previsualizar.pdf" (click)="mostrarMensaje()" class="actions btn w-100">Descargar</a>
+        <a *ngIf="!isLogueado()" ref="../../assets/pdfs/Previsualizar.pdf" (click)="iniciarSesion()" class="actions btn w-100">Descargar</a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <ng-container *ngIf="isLogueado()">
+    <div class="rating">
+      <input [checked]="getCalificacion(libro.id) === 5" (change)="calificar(5, libro.id)" value="1" name="star-radio" id="star-1" type="radio">
+      <label for="star-1">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+      </label>
+      <input [checked]="getCalificacion(libro.id) === 4" (change)="calificar(4, libro.id)" value="2" name="star-radio" id="star-2" type="radio">
+      <label for="star-2">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+      </label>
+      <input [checked]="getCalificacion(libro.id) === 3" (change)="calificar(3, libro.id)" value="3" name="star-radio" id="star-3" type="radio">
+      <label for="star-3">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+      </label>
+      <input [checked]="getCalificacion(libro.id) === 2" (change)="calificar(2, libro.id)" value="4" name="star-radio" id="star-4" type="radio">
+      <label for="star-4">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+      </label>
+      <input [checked]="getCalificacion(libro.id) === 1" (change)="calificar(1, libro.id)" value="5" name="star-radio" id="star-5" type="radio">
+      <label for="star-5">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" pathLength="360"></path></svg>
+      </label>
+      <label for="calificar" style="text-align: center; display: block; margin-bottom: 5px;">Puntúa el libro</label>
+    </div>
+  </ng-container>
+
+
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="prestar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16">
+        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+      </svg>
+      <strong class="me-auto">Prestamos</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" style="color: black;">
+      Se ha prestado el libro
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="reservar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16">
+        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+      </svg>
+      <strong class="me-auto">Reservas</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" style="color: black;">
+      Se ha reservado el libro
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="noPrestar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+      </svg>
+      <strong class="me-auto">Préstamos</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" style="color: black;">
+      ¡Ya tienes el número máximo de préstamos!
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="debes_tener_prestado" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+      </svg>
+      <strong class="me-auto">No puedes ver el libro</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" style="color: black;">
+      ¡Debes tener el libro prestado para ver su contenido!
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="noReservar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+      </svg>
+      <strong class="me-auto">Reservas</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" style="color: black;">
+      Se ha cancelado la reserva del libro
+    </div>
+  </div>
+</div>

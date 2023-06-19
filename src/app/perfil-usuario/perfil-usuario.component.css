@@ -1,0 +1,7 @@
+input:disabled {
+  /* Los colores y estilos pueden ser ajustados a tus necesidades */
+  background-color: #fff; /* Establece el color de fondo del input */
+  color: #000000; /* Establece el color del texto del input */
+  cursor: text; /* Cambia el cursor a cursor de texto */
+  /* O cualquier otro estilo que quieras aplicar */
+}

@@ -1,30 +1,34 @@
-<div class="card" style="width: 13rem;">
-  <img src="..." class="card-img-top" alt="...">
+<div class="card text-left card-custom mb-4 col-12 col-sm-6 col-md-10 col-lg-10">
+  <a [routerLink]="['/detalles', libro.id]" routerLinkActive="active" href="#" (click)="asignarLibro(libro)">
+    <img src="{{libro.image}}" class="card-img-top" alt="Portada del libro {{libro.titulo}}">
+  </a>
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text"></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
-
-<!-- <div class="row">
-  <div *ngFor="let libro of get_libros()" class="card" style="width: 18rem;">
-    <img src="../../assets/imagenes_libros/91G5zRD4wDL.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{libro.titulo}}</h5>
-      <button type="button" class="btn btn-primary">Detalles</button>
-      <button type="button" class="btn btn-primary" (click)="reservar(libro.id)">Reservar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-      </svg></button>
+    <a [routerLink]="['/detalles', libro.id]" routerLinkActive="active" href="#" (click)="asignarLibro(libro)" class="d-block mb-2 truncate-lines">
+      {{ libro.titulo }}
+    </a>
+    <div class="d-flex justify-content-between">
+      <div *ngIf="isLogueado()" class="btn-group">
+        <button *ngIf="getStock(libro.id)==0 && !estaReservado(libro.id)" type="button" class="btn reservar" (click)="reservar(libro.id)">Reservar</button>
+        <button *ngIf="getStock(libro.id)==0 && estaReservado(libro.id)" type="button" class="btn reservar" (click)="cancelarReserva(libro.id)">No reservar</button>
+        <button *ngIf="getStock(libro.id)>0 && !estaPrestado(libro.id)" type="button" class="btn prestar" (click)="prestar(libro.id)">Prestar</button>
+        <button disabled *ngIf="getStock(libro.id)>0 && estaPrestado(libro.id)" type="button" class="btn prestar">Prestado</button>
+      </div>
+      <div *ngIf="!isLogueado()" class="btn-group">
+        <button *ngIf="getStock(libro.id)==0" type="button" class="btn reservar" (click)="reservar(libro.id)">Reservar</button>
+        <button *ngIf="getStock(libro.id)>0" type="button" class="btn prestar" (click)="prestar(libro.id)">Prestar</button>
+      </div>
+      <div class="btn-group">
+        <button *ngIf="!isFav(libro.id) " (click)="addFav(libro.id)" type="button" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="red" class="custom-icon" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg>
+        </button>
+        <button *ngIf="isFav(libro.id)" (click)="removeFav(libro.id)" type="button" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="custom-icon" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </div>
- -->

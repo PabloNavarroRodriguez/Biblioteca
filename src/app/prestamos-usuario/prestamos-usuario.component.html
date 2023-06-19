@@ -1,0 +1,136 @@
+<div *ngIf="isLogueado()" class="container">
+    <h1>Mis préstamos en curso </h1>
+  <div class="table-responsive d-flex justify-content-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Fecha de realización del préstamo</th>
+          <th>Fecha de devolución máxima</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of getPrestamos()">
+          <ng-container *ngIf="libro.vigente == undefined || libro.vigente === 1">
+            <th>{{ libro.titulo }}</th>
+            <td>
+              <ng-container *ngIf="libro.fecha_creacion_prestamo">
+                {{ libro.fecha_creacion_prestamo | date:'dd/MM/yyyy' }}
+              </ng-container>
+              <ng-container *ngIf="!libro.fecha_creacion_prestamo">
+                {{ fechaActual | date:'dd/MM/yyyy' }}
+              </ng-container>
+            </td>
+            <td>
+              <ng-container *ngIf="libro.fecha_devolucion; else fechaDevolucion">
+                {{ libro.fecha_devolucion | date:'dd/MM/yyyy' }}
+              </ng-container>
+              <ng-template #fechaDevolucion>
+                {{ calcularFechaDevolucion(fechaActual) | date:'dd/MM/yyyy' }}
+              </ng-template>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <h1>
+    Préstamos devueltos
+  </h1>
+  <div class="table-responsive d-flex justify-content-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Fecha de préstamo</th>
+          <th>Fecha de devolucion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of getPrestamosDevueltosPaginados()">
+          <ng-container *ngIf="libro.vigente == 0">
+            <th>{{libro.titulo}}</th>
+            <td>
+              <ng-container *ngIf="libro.fecha_creacion_prestamo">
+                {{ libro.fecha_creacion_prestamo | date:'dd/MM/yyyy' }}
+              </ng-container>
+              <ng-container *ngIf="!libro.fecha_creacion_prestamo">
+                {{ fechaActual | date:'dd/MM/yyyy' }}
+              </ng-container>
+            </td>
+
+            <td>
+              <ng-container *ngIf="libro.fecha_devolucion">
+                {{ libro.fecha_devolucion | date:'dd/MM/yyyy' }}
+              </ng-container>
+              <ng-container *ngIf="!libro.fecha_devolucion">
+                {{ fechaActual | date:'dd/MM/yyyy' }}
+              </ng-container>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPageDevueltos === 1">
+        <a class="page-link" href="javascript:void(0);" (click)="currentPageDevueltos = 1">Primera</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPageDevueltos === 1">
+        <a class="page-link" href="javascript:void(0);" (click)="currentPageDevueltos = currentPageDevueltos - 1">Anterior</a>
+      </li>
+      <li class="page-item" *ngFor="let page of getPaginasDevueltos()" [class.active]="currentPageDevueltos === page">
+        <a class="page-link" href="javascript:void(0);" (click)="currentPageDevueltos = page">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPageDevueltos === getTotalPaginasDevueltos()">
+        <a class="page-link" href="javascript:void(0);" (click)="currentPageDevueltos = currentPageDevueltos + 1">Siguiente</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPageDevueltos === getTotalPaginasDevueltos()">
+        <a class="page-link" href="javascript:void(0);" (click)="currentPageDevueltos = getTotalPaginasDevueltos()">Última</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="!isLogueado()" class="container">
+  <div class="row">
+      <div class="col-12 text-center error-container">
+        <h1 class="display-1">No has iniciado sesión</h1>
+          <p class="lead">Lo sentimos, la página a la que estás intentado acceder es exclusiva para usuarios registrados.</p>
+          <a href="/login" class="btn btn-lg" style="background-color: #d4af7e;color: black; font-weight: bold;">Iniciar sesión</a>
+      </div>
+  </div>
+</div>
+
+<!--
+<div class="table-responsive d-flex justify-content-center">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Usuario</th>
+        <th>Fecha de realización del préstamo</th>
+        <th>Fecha de devolución máxima</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let libro of getPrestamosPaginados()">
+          <th>{{ getTitulo(libro.libroId) }} ID:({{libro.libroId}})</th>
+          <td>{{libro.email}} ID:({{libro.usuarioId}})</td>
+          <td>
+              {{ libro.fecha_creacion | date:'dd/MM/yyyy' }}
+          </td>
+          <td>
+            {{ libro.fecha_devolucion_limite | date:'dd/MM/yyyy' }}
+          </td>
+          <td>
+            <button class="btn" (click)="devolver(libro.libroId, libro.usuarioId)"> Devolver </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+-->

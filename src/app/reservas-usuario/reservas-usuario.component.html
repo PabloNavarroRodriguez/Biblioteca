@@ -1,0 +1,37 @@
+<div *ngIf="isLogueado()" class="container">
+    <h1>Mis reservas en curso </h1>
+    <div class="table-responsive d-flex justify-content-center">
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Fecha de realización de la reserva</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of getReservas()">
+            <th>{{ libro.titulo }}</th>
+            <td>
+                {{ libro.createdAt | date:'dd/MM/yyyy' }}
+            </td>
+            <td>
+              <button class="btn" (click)="cancelarReserva(libro.id)"> Cancelar reserva </button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="!isLogueado()" class="container">
+  <div class="row">
+      <div class="col-12 text-center error-container">
+        <h1 class="display-1">No has iniciado sesión</h1>
+          <p class="lead">Lo sentimos, la página a la que estás intentado acceder es exclusiva para usuarios registrados.</p>
+          <a href="/login" class="btn btn-lg" style="background-color: #d4af7e;color: black; font-weight: bold;">Iniciar sesión</a>
+      </div>
+  </div>
+</div>
+
+
