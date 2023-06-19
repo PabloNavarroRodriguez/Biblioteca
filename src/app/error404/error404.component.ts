@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-error404',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class Error404Component {
 
+  constructor(private titleService: Title){}
+
+  ngOnInit() {
+    this.titleService.setTitle('BookABook - Error404');
+  }
 }

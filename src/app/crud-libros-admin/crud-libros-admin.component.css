@@ -1,0 +1,49 @@
+table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  color: white;
+}
+
+th {
+  background-color: white;
+  font-weight: bold;
+  color: black;
+}
+
+.actions {
+  width: 170px; /* Ajusta el ancho de la columna de acciones según sea necesario */
+}
+
+.actions a {
+  margin-left: 5px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+#botonAgregarLibro{
+  /* color: rgb(212, 175, 126); */
+  font-weight: bold;
+  background-color: rgb(212, 175, 126);
+}
+
+.pagination li a {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+.pagination li.active a {
+  background-color: rgb(212, 175, 126);
+}
+
+.pagination li.disabled a {
+  background-color: lightgray;
+  /* color: none; */
+  font-weight: 100;
+}

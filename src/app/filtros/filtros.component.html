@@ -1,34 +1,43 @@
-<div class="menu">
-  <h2>Filtros</h2>
-  <hr>
-
-  <div class="menu-item">
-    <div class="input-group">
-      <span class="input-group-text">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-      </span>
-      <label for="busca" class="visually-hidden">Buscar:</label>
-      <input type="text" name="busca" id="busca" class="form-control" >
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <div class="navbar-content-large">
+      <ul class="navbar-nav">
+        <li class="nav-item text">
+          <div class="input-group">
+            <span class="input-group-text" id="search-addon-large">
+              <i class="fas fa-search"></i>
+            </span>
+            <input #textLarge type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="search-addon-large" (keyup)="setTextFilter(textLarge.value)">
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="btn-container" data-toggle="buttons">
+            <button *ngFor="let g of get_generos()" class="btn btn-custom" [ngClass]="{active: selectedButton === g.id}" (click)="toggleButton(g)">{{g.nombre}}</button>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-
-  <div class="menu-item">
-    <label for="filtro">Filtrar por:</label>
-    <select name="filtro" id="filtro" class="form-select">
-      <option value="titulo">Título</option>
-      <option value="autor">Autor</option>
-      <option value="editora">Editora</option>
-      <option value="genero">Gênero</option>
-    </select>
+</nav>
+<nav>
+  <div class="container-fluid">
+    <div class="navbar-content-small">
+      <div class="d-flex justify-content-between">
+        <div class="input-group">
+          <span class="input-group-text" id="search-addon-small" (click)="openSearch(textSmall)">
+            <i class="fas fa-search"></i>
+          </span>
+          <input #textSmall type="text" class="form-control small-search" [ngClass]="{'open': isSearchOpen}" aria-label="Buscar" aria-describedby="search-addon-small" (keyup)="setTextFilter(textSmall.value)" (blur)="closeSearch()">
+        </div>
+        <div class="dropdown ml-auto" [ngClass]="{'show': dropdownOpen}" (mouseleave)="dropdownOpen = false">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="dropdownOpen = !dropdownOpen">
+              {{ selectedButton?.nombre || 'Géneros' }}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" [style.display]="dropdownOpen ? 'block' : 'none'" aria-labelledby="dropdownMenuButton">
+              <button *ngFor="let g of get_generos()" class="dropdown-item" [ngClass]="{active: selectedButton === g.id}" (click)="toggleButton(g)">{{g.nombre}}</button>
+          </div>
+      </div>
+      </div>
+    </div>
   </div>
-
-  <h4>Géneros</h4>
-  <hr>
-  <input type="checkbox">Drama <br>
-  <input type="checkbox">Amor  <br>
-  <input type="checkbox">Aventura <br>
-  <input type="checkbox">Policiaca <br>
-</div>
-
+</nav>

@@ -1,25 +1,17 @@
+:host {
+  height: 100px;
+}
+
 .cabecera {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 80px;
-  background-image: url('../../assets/imagenes_comunes/books-4515917_1280.png');
-  /* background-color: burlywood; */
+  background-color: #d4af7e;
   background-size: cover;
   background-position: center;
-  z-index: 1;
-}
-
-.cabecera::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
+  z-index: 2;
 }
 
 .cabecera ul li {
@@ -28,24 +20,126 @@
   font-size: 2em;
 }
 
-.menu {
+@media (max-width: 991.98px) {
+  .navbar-collapse.collapsing {
+    background-color: #d4af7e; /* Fondo de tu elección */
+    transition: height 0.3s ease;
+  }
+
+  .navbar-collapse.show {
+    background-color: rgb(212, 175, 126);
+    transition: height 0.3s ease;
+  }
+
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.nav-link {
+  color: black !important;
+  position: relative;
+}
+
+.indicator {
   display: none;
   position: absolute;
-  top: 50px;
-  left: 0;
-  background-color: #f1f1f1;
-  padding: 10px;
+  top: 5px; /* acerca el indicador al enlace */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #403115;
+  border-radius: 50%;
+  animation: bounce 0.5s ease-in-out; /* añade la animación de rebote */
 }
 
-.menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+@keyframes bounce { /* define la animación de rebote */
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(2); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+.nav-item.active .nav-link .indicator {
+  display: block;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-extra {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+/* Estilos para pantallas grandes */
+@media screen and (min-width: 992px) {
+  .content-small {
+    display: none;
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 991px) {
+  .content-large {
+    display: none;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1.25rem;
+  color: #212529;
+  text-align: left;
+  background-color: #d4af7e;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  transition: opacity .2s ease, transform .2s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden; /* Agrega esta línea */
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible; /* Agrega esta línea */
+}
+
+.navbar-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px; /*ajusta la altura de acuerdo a tu diseño */
+}
+
+.navbar-brand img {
+  position: absolute;
+  width: 200px;
+  /* height: 200px; */
+  top: 30px;
+  left: 100px;
+  transform: translate(-50%, -50%);
 }
 
 
-
-.menu ul li a:hover {
-  text-decoration: underline;
-  color: #333;
-}

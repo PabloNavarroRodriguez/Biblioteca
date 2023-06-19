@@ -1,0 +1,18 @@
+<div *ngIf="isLogueado()" class="container">
+  <h1>Mis favoritos</h1>
+  <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let libro of getFavs()">
+      <app-tarjeta-libro [libro]="libro"></app-tarjeta-libro>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isLogueado()" class="container">
+  <div class="row">
+      <div class="col-12 text-center error-container">
+        <h1 class="display-1">No has iniciado sesión</h1>
+          <p class="lead">Lo sentimos, la página a la que estás intentado acceder es exclusiva para usuarios registrados.</p>
+          <a href="/login" class="btn btn-lg" style="background-color: #d4af7e;color: black; font-weight: bold;">Iniciar sesión</a>
+      </div>
+  </div>
+</div>
+

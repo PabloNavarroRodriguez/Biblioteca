@@ -1,10 +1,72 @@
-.menu {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 200px;
-  background-color: #979797;
-  padding-top: 6%;
+.btn-custom {
+  background: none;
+  color: rgb(212, 175, 126);
+  border: 1px solid rgb(212, 175, 126);
+  margin-right: 10px;
+  border-radius: 20px;
 }
 
+.btn-custom.active {
+  color: black;
+  background: rgb(212, 175, 126);
+  border: 1px solid rgb(212, 175, 126);
+}
+
+.btn-container {
+  display: flex;
+}
+
+.text{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.navbar-content-large {
+  display: none;
+}
+
+.navbar-content-small {
+  display: block;
+}
+
+@media screen and (min-width: 992px ) {
+  .navbar-content-large {
+    display: block;
+  }
+
+  .navbar-content-small {
+    display: none;
+  }
+}
+
+.input-group .form-control.small-search {
+  transform: scaleX(0);
+  transform-origin: left;
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  transition: transform 0.5s ease-out, background-color 0.5s ease-out, color 0.5s ease-out;
+  pointer-events: none;
+  max-width: 50vw;
+}
+
+.input-group .form-control.small-search.open {
+  transform: scaleX(1);
+  background-color: white;
+  color: black;
+  border: 1px solid #ced4da;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+ .dropdown {
+  background-color: rgb(212, 175, 126);
+  border-radius: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  left: auto;
+  z-index: 1;
+}

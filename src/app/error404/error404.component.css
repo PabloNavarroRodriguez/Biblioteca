@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.error-container h1 {
+  font-size: 120px;
+}
+
+.btn{
+  background-color: rgb(212, 175, 126);
+  color: black;
+}

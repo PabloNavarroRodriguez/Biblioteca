@@ -1,0 +1,5 @@
+<div class="container">
+<div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+  <app-tarjeta-libro *ngFor="let libro of get_libros() | pipeFiltro:get_autores():getTextFilter() | pipeSelect:getSelectFilter()" [libro]="libro"></app-tarjeta-libro>
+</div>
+</div>

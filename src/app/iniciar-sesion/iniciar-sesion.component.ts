@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ConexionAPIService } from '../conexion-api.service';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioServiceService } from '../usuario-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -8,38 +9,59 @@ import { Router } from '@angular/router';
   styleUrls: ['./iniciar-sesion.component.css']
 })
 export class IniciarSesionComponent {
-  constructor(private conexion_api:ConexionAPIService, private router:Router){}
 
-  comprobarDatos(email:string){
+  showError = false;
+
+  constructor(private conexion_api:UsuarioServiceService, private router:Router, private titleService: Title){}
+
+  ngOnInit() {
+    this.titleService.setTitle('BookABook - IniciarSesion');
+  }
+
+  comprobarEmail(email:string){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  iniciarSesion(email:string, passwd:string){
-    if(email == "" || passwd==""){
-      alert("Esta vacio");
-    }
-    if(this.comprobarDatos(email)){
-      var msg = this.conexion_api.login(email, passwd);
-      console.log(msg);
-      // switch(msg){
-      //   case "todo ok":
-      //     this.router.navigate(['/home']);
-      //     break;
-      //   case "contraseña incorrecta":
-      //     alert("La contraseña es errónea");
-      //     break;
-      //   case "email incorrecto":
-      //     alert("El email es incorrecto");
-      //     break;
-      //   default:
-      //     alert("No se que pasa jeje");
-      //     break;
+  iniciarSesion(email: string, passwd: string) {
+
+    this.conexion_api.login(email, passwd)
+    .then(msg => {
+      console.log(msg)
+      this.router.navigate(['/libros']);
+    })
+    .catch(error => {
+      console.error(error);
+      switch (error) {
+        case "Contrasena incorrecta":
+          console.log("ha entrado")
+          this.showError = true;
+          break;
+        case "Email incorrecto, vuelva a probar":
+          this.showError = true;
+        break;
+        default:
+          alert("Error en la solicitud de inicio de sesión");
+        break;
+      }
+      // if (!email || email.trim() === '' || !this.comprobarEmail(email)) {
+      //   this.showErrorEmail = true;
+      //   this.emailInput.nativeElement.style.borderColor = 'red';
+      // } else {
+      //   this.showErrorEmail = false;
+      //   this.emailInput.nativeElement.style.borderColor = '';
       // }
 
-    } else {
-      alert("No es un email");
+      // if (!passwd || passwd.trim() === '') {
+      //   this.showErrorPassword = true;
+      //   this.passwordInput.nativeElement.style.borderColor = 'red';
+      // } else {
+      //   this.showErrorPassword = false;
+      //   this.passwordInput.nativeElement.style.borderColor = '';
+      // }
+    });
 
-    }
+
   }
+
 }

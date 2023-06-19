@@ -1,0 +1,14 @@
+.form-group{
+  margin-bottom: 10px;
+}
+
+.divVolver{
+  padding: 0;
+  margin: 0;
+  height: 50px;
+  width: 70px;
+}
+
+.volver{
+  color: rgb(212, 175, 126);
+}
